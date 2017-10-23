@@ -1,6 +1,5 @@
 require "sinatra"
 
-
 def page_content(title)
     File.read("pages/#{title}.txt")
 rescue Errno::ENOENT
@@ -12,6 +11,8 @@ get "/" do
 end
 
 get "/:title" do
-    params[:title]
-    page_content(params[:title])
+    @title  = params[:title]
+    @content = page_content(@title)
+    erb :show
 end
+
