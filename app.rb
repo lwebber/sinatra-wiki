@@ -1,10 +1,9 @@
-require 'sinatra'
+require "sinatra"
 
-#test integrated source control
 
 def page_content(title)
     File.read("pages/#{title}.txt")
-rescue Error::ENDENT
+rescue Errno::ENOENT
     return nil
 end
 
@@ -13,5 +12,6 @@ get "/" do
 end
 
 get "/:title" do
+    params[:title]
     page_content(params[:title])
 end
