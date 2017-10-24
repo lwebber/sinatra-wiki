@@ -1,4 +1,5 @@
 require "sinatra"
+require "uri"
 
 def page_content(title)
     File.read("pages/#{title}.txt")
@@ -27,6 +28,7 @@ get "/:title" do
 end
 
 post "/create" do
-    "Hello from the post '/create' route"
+    save_content(params["title"], params["content"])
+    redirect URI.escape("/#{params["title"]}")
 end
 
